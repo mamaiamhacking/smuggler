@@ -237,7 +237,9 @@ class Desyncr():
                 furl = "https_" + furl
             else:
                 furl = "http_" + furl
-            fname = os.path.realpath(os.getcwd()) + "/payloads/%s_%s_%s.txt" % (furl,ptype,name)
+            if (not os.path.isdir("payloads")):
+                os.mkdir("payloads")
+            fname = os.path.realpath("./payloads/%s_%s_%s.txt" % (furl,ptype,name))
             pretty_print("CRITICAL", "%s Payload: %s URL: %s\n" % \
             (Fore.MAGENTA+ptype, Fore.CYAN+fname+Fore.MAGENTA, Fore.CYAN+self._url))
             with open(fname, 'wb') as file:
