@@ -232,15 +232,12 @@ class Desyncr():
 
         # Write payload to the current directory
         def write_payload(smhost, payload, ptype):
-            # if (self.ssl_flag):
-            # 	furl = "https_" + furl
-            # else:
-            # 	furl = "http_" + furl
-            # if os.path.islink(sys.argv[0]):
-            # 	_me = os.readlink(sys.argv[0])
-            # else:
-            # 	_me = sys.argv[0]
-            fname = os.path.realpath(os.getcwd()) + "/payloads.txt"
+            furl = smhost.replace('.', '_')
+            if (self.ssl_flag):
+                furl = "https_" + furl
+            else:
+                furl = "http_" + furl
+            fname = os.path.realpath(os.getcwd()) + "/payloads/%s_%s_%s.txt" % (furl,ptype,name)
             pretty_print("CRITICAL", "%s Payload: %s URL: %s\n" % \
             (Fore.MAGENTA+ptype, Fore.CYAN+fname+Fore.MAGENTA, Fore.CYAN+self._url))
             with open(fname, 'wb') as file:
